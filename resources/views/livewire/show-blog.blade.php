@@ -5,9 +5,9 @@
                 <div class="col-8 mx-auto text-center">
                     <h2 class="mb-3 text-capitalize">Blog</h2>
                     <ul class="list-inline breadcrumbs text-capitalize" style="font-weight:500">
-                        <li class="list-inline-item"><a href="index.html">Home</a>
+                        <li class="list-inline-item"><a href="{{ route('home') }}" wire:navigate>Home</a>
                         </li>
-                        <li class="list-inline-item">/ &nbsp; <a href="blog.html">Blog</a>
+                        <li class="list-inline-item">/ &nbsp; Blog
                         </li>
                     </ul>
                 </div>
@@ -53,9 +53,9 @@
                                     </div>
                                     <div class="pt-4">
                                         <p class="mb-3">{{ \Carbon\Carbon::parse($article->created_at)->format('d M, Y') }}</p>
-                                        <h2 class="h4"><a class="text-black" href="blog-details.html">{{ $article->title }}</a></h2>
+                                        <h2 class="h4"><a class="text-black" href="{{ route('blogDetails', $article->id) }}" wire:navigate>{{ $article->title }}</a></h2>
                                         {{-- <p>{!! $article->content !!}</p> --}}
-                                        <a href="blog-details.html" class="text-primary fw-bold" aria-label="Read the full article by clicking here">Read More</a>
+                                        <a href="{{ route('blogDetails', $article->id) }}" wire:navigate class="text-primary fw-bold" aria-label="Read the full article by clicking here">Read More</a>
                                     </div>
                                 </article>
                             </div>
@@ -118,7 +118,7 @@
                     @foreach ($latestArticles as $latestArticle) 
                     <ul class="list-unstyled widget-list">
                         <li class="d-flex widget-post align-items-center">
-                            <a class="text-black" href="/blog/elements/">
+                            <a class="text-black" href="{{ route('blogDetails', $latestArticle->id) }}" wire:navigate>
                                 <div class="widget-post-image flex-shrink-0 me-3">
                                     {{-- <img class="rounded" loading="lazy" decoding="async" src="images/blog/post-4.jpg" alt="Post Thumbnail"> --}}
                                     @if ($latestArticle->image != '')
@@ -128,7 +128,7 @@
                                 </div>
                             </a>
                             <div class="flex-grow-1">
-                                <h5 class="h6 mb-0"><a class="text-black" href="blog-details.html">{{ $latestArticle->title }}</a></h5>
+                                <h5 class="h6 mb-0"><a class="text-black" href="{{ route('blogDetails', $latestArticle->id) }}" wire:navigate>{{ $latestArticle->title }}</a></h5>
                                 <small>{{ \Carbon\Carbon::parse($latestArticle->created_at)->format('d M, Y') }}</small>
                             </div>
                         </li>
